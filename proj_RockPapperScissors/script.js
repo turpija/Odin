@@ -1,4 +1,4 @@
-console.log("ROCK PAPPER SCISSORS");
+console.log("...:: ROCK .. PAPPER .. SCISSORS ::...");
 
 /*
 
@@ -86,25 +86,25 @@ function playRound() {
                 return "tie";
             }
         } else if (itemComp == "paper") {
-            if (itemUser = "rock") {
-                // user won
-                // console.log(`user won !`);
-                return "user";
-            } else if (itemUser = "scissors") {
+            if (itemUser == "rock") {
                 // comp won
                 // console.log(`COMP won !`);
                 return "comp";
+            } else if (itemUser == "scissors") {
+                // user won
+                // console.log(`user won !`);
+                return "user";
             } else {
                 // it's a tie
                 // console.log(`it's a tie !`);
                 return "tie";
             }
-        } else if (itemComp = "scissors") {
+        } else if (itemComp == "scissors") {
             if (itemUser == "rock") {
                 // user won
                 // console.log(`user won !`);
                 return "user";
-            } else if (itemUser = "paper") {
+            } else if (itemUser == "paper") {
                 // comp won
                 // console.log(`COMP won !`);
                 return "comp";
@@ -119,6 +119,37 @@ function playRound() {
     return evaluateWinner(getComputerChoice(), userSelection());
 }
 
+
+// pokreće funkc playRound, i prati rezultat
+// na kraju vraća rezultat i pobjednika
+function game() {
+    let rounds = 5;
+    let scoreUser = 0;
+    let scoreComp = 0;
+
+    for (let i = 0; i < rounds; i++) {
+        switch (playRound()) {
+            case "user":
+                scoreUser++;
+                break;
+            case "comp":
+                scoreComp++;
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    console.log(`scoreUser: ${scoreUser}, scoreCOMP: ${scoreComp}`);
+
+    if (scoreUser > scoreComp) {
+        return ">>> POBIJEDIJO SI RAČUNARA <<<"
+    } else {
+        return ">>> RAČUNAR TE POBIJEDIJO <<<"
+    }
+}
+
 //console.log("getComputerChoice: "+ getComputerChoice());
 //console.log("userSelection: "+userSelection());
-console.log(playRound());
+console.log(game());
