@@ -11,8 +11,9 @@ pokrećem funkc game
 
 */
 
-// nasumično izabire broj od 1 do 3 i dodjeljuje rock/paper/scissors sa strane kompjutera
-function getComputerChoice() { 
+// nasumično izabire za kompjutera
+// vraća string "rock" / "paper" / "scissors"
+function getComputerChoice() {
     let num = Math.floor(Math.random() * 3) + 1;
     switch (num) {
         case 1:
@@ -25,7 +26,8 @@ function getComputerChoice() {
 
 }
 
-// izbor korisnika
+// uzima izbor korisnika iz prompta
+// vraća string "rock" / "paper" / "scissors"
 function userSelection() {
 
     let userChoice = "";
@@ -42,7 +44,7 @@ function userSelection() {
             return false;
         }
     }
-    
+
     // dok ne unese točan izbor .. inifinte loop
     while (!validInput(userChoice)) {
         userChoice = prompt('(R)ock", "(P)aper" or "(S)cissors"').toLowerCase();
@@ -63,5 +65,60 @@ function userSelection() {
     }
 }
 
-console.log("getComputerChoice: "+ getComputerChoice());
-console.log("userSelection: "+userSelection());
+// poziva izbor compa i usera i vraća
+// vraća pobjednika, string "user" / "comp" / "tie"
+function playRound() {
+
+    function evaluateWinner(itemComp, itemUser) {
+        console.log(`evaluate ... (comp: ${itemComp}), (user: ${itemUser})`);
+        if (itemComp == "rock") {
+            if (itemUser == "paper") {
+                // user won
+                // console.log(`user won !`);
+                return "user";
+            } else if (itemUser == "scissors") {
+                // comp won
+                // console.log(`COMP won !`);
+                return "comp";
+            } else {
+                // it's a tie
+                // console.log(`it's a tie !`);
+                return "tie";
+            }
+        } else if (itemComp == "paper") {
+            if (itemUser = "rock") {
+                // user won
+                // console.log(`user won !`);
+                return "user";
+            } else if (itemUser = "scissors") {
+                // comp won
+                // console.log(`COMP won !`);
+                return "comp";
+            } else {
+                // it's a tie
+                // console.log(`it's a tie !`);
+                return "tie";
+            }
+        } else if (itemComp = "scissors") {
+            if (itemUser == "rock") {
+                // user won
+                // console.log(`user won !`);
+                return "user";
+            } else if (itemUser = "paper") {
+                // comp won
+                // console.log(`COMP won !`);
+                return "comp";
+            } else {
+                // it's a tie
+                // console.log(`it's a tie !`);
+                return "tie";
+            }
+        }
+    }
+
+    return evaluateWinner(getComputerChoice(), userSelection());
+}
+
+//console.log("getComputerChoice: "+ getComputerChoice());
+//console.log("userSelection: "+userSelection());
+console.log(playRound());
