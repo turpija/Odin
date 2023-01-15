@@ -11,10 +11,8 @@ pokrećem funkc game
 
 */
 
-function getComputerChoice() {
-    /*
-        nasumično izabire broj od 1 do 3 i dodjeljuje rock/paper/scissors
-    */
+// nasumično izabire broj od 1 do 3 i dodjeljuje rock/paper/scissors sa strane kompjutera
+function getComputerChoice() { 
     let num = Math.floor(Math.random() * 3) + 1;
     switch (num) {
         case 1:
@@ -27,15 +25,29 @@ function getComputerChoice() {
 
 }
 
+// izbor korisnika
 function userSelection() {
-    /* 
-        -- DODAJ --
-        šta ako izabere nešto što ne postoji
-        dodaj while loop, prompt dok ne izabere točno
-    */
 
-    let userChoice = prompt('(R)ock", "(P)aper" or "(S)cissors"').toLowerCase();
+    let userChoice = "";
+
+    // provjera dozvoljenih unosa
+    function validInput(str) {
+        if (str === "rock" || str === "r" ||
+            str === "paper" || str === "p" ||
+            str === "scissors" || str === "s") {
+            // console.log("valid user input");
+            return true;
+        } else {
+            // console.log("invalid user input");
+            return false;
+        }
+    }
     
+    // dok ne unese točan izbor .. inifinte loop
+    while (!validInput(userChoice)) {
+        userChoice = prompt('(R)ock", "(P)aper" or "(S)cissors"').toLowerCase();
+    }
+
     switch (userChoice) {
         case "rock":
         case "r":
@@ -51,5 +63,5 @@ function userSelection() {
     }
 }
 
-console.log(getComputerChoice());
-console.log(userSelection());
+console.log("getComputerChoice: "+ getComputerChoice());
+console.log("userSelection: "+userSelection());
