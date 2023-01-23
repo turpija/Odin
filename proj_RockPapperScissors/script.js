@@ -1,4 +1,4 @@
-console.log("...:: ROCK .. PAPPER .. SCISSORS ::...");
+console.log("...:: ROCK .. PAPER .. SCISSORS ::...");
 
 /*
 
@@ -67,7 +67,7 @@ function userSelection() {
 
 // poziva izbor compa i usera i vraća
 // vraća pobjednika, string "user" / "comp" / "tie"
-function playRound() {
+function playRound(e) {
 
     function evaluateWinner(itemComp, itemUser) {
         console.log(`evaluate ... (comp: ${itemComp}), (user: ${itemUser})`);
@@ -115,41 +115,49 @@ function playRound() {
             }
         }
     }
-
-    return evaluateWinner(getComputerChoice(), userSelection());
+    return evaluateWinner(getComputerChoice(), e.target.id);
 }
 
 
 // pokreće funkc playRound, i prati rezultat
 // na kraju vraća rezultat i pobjednika
-function game() {
-    let rounds = 5;
-    let scoreUser = 0;
-    let scoreComp = 0;
+function game(e) {
 
-    for (let i = 0; i < rounds; i++) {
-        switch (playRound()) {
+        switch (playRound(e)) {
             case "user":
-                scoreUser++;
+                scoreUser.textContent++;
                 break;
             case "comp":
-                scoreComp++;
+                scoreComp.textContent++;
                 break;
             default:
                 break;
         }
 
-    }
 
-    console.log(`scoreUser: ${scoreUser}, scoreCOMP: ${scoreComp}`);
+    console.log(`scoreUser: ${scoreUser.textContent}, scoreCOMP: ${scoreComp.textContent}`);
 
-    if (scoreUser > scoreComp) {
-        return ">>> POBIJEDIJO SI RAČUNARA <<<"
-    } else {
-        return ">>> RAČUNAR TE POBIJEDIJO <<<"
+    if (scoreUser.textContent == 5) {
+        alert(">>> POBIJEDIJO SI RAČUNARA <<<");
+    } else if (scoreComp.textContent == 5){
+        alert(">>> RAČUNAR TE POBIJEDIJO <<<");
     }
 }
 
 //console.log("getComputerChoice: "+ getComputerChoice());
 //console.log("userSelection: "+userSelection());
-console.log(game());
+// console.log(game());
+
+const rockBtn = document.querySelector("#rock");
+rockBtn.addEventListener("click", game);
+
+const paperBtn = document.querySelector("#paper");
+paperBtn.addEventListener("click", game);
+
+const scissorsBtn = document.querySelector("#scissors");
+scissorsBtn.addEventListener("click", game);
+
+const scoreUser = document.querySelector("#scoreUser");
+scoreUser.textContent = 0;
+const scoreComp = document.querySelector("#scoreComp");
+scoreComp.textContent = 0;
